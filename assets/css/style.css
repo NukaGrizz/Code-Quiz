@@ -1,0 +1,129 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: flex;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    margin: 20px auto;
+}
+
+.viewScore {
+    color: violet;
+    font-size: 20px;
+    width: 50%;
+}
+
+.viewScore:hover {
+    color: blueviolet;
+    text-decoration: underline;
+}
+
+.countdown {
+    width: 50%;
+    font-size: 20px;
+    text-align: right;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    max-width: 690px;
+    align-items: center;
+    margin: auto;
+}
+
+main h2 {
+    text-align: center;
+    margin: 5px 0;
+    font-size: xx-large;
+    width: 100%;
+}
+
+.questionhead {
+    text-align: left;
+}
+
+main p {
+    text-align: center;
+    margin: 5px auto;
+    font-size: x-large;
+}
+
+
+button {
+    border-radius: 10px;
+    font-size: larger;
+    padding: 10px 20px;
+    background-color: blueviolet;
+    color: white;
+    margin: 5px 0;
+}
+
+button:hover {
+    background-color: violet;
+    color: blueviolet;
+}
+
+.btn-start {
+    text-align: center;
+    display: block;
+}
+
+.btn-multi {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 100%;
+}
+
+.btn-questions {
+    text-align: left;
+    width: 30%;
+    min-width: 100px; 
+}
+
+.qResult {
+    text-align: left;
+    width: 100%;
+    font-size: xx-large;
+    font-style: italic;
+    border-top: solid 2px rgba(128, 128, 128, 0.7);
+    color: rgba(128, 128, 128, 0.7);
+    margin-top: 10px;
+}
+
+.highScoreSubmit {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.submitScore {
+    text-align: left;
+    width:auto;
+    margin: 0 10px 0 0;
+}
+
+.btn-submit {
+    margin: 0;
+    width: 20%;
+    min-width: 100px; 
+    padding: 0;
+}
+
+.hide {
+    display: none;
+}
