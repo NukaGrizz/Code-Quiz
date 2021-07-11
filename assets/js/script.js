@@ -222,6 +222,15 @@ var displayHighScore = function() {
 
     btnGoBack.onclick = reset;
 
+    btnClear.addEventListener('click', function() {
+        console.log("click");
+        localStorage.removeItem('name');
+        localStorage.removeItem('score');
+        displayHighScore;
+        var li = document.getElementById("li")
+        scoreList.removeChild(li);
+    });
+
     var name = localStorage.getItem("name");
     var score = localStorage.getItem("score");
 
