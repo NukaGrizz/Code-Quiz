@@ -220,12 +220,15 @@ var displayHighScore = function() {
     btnGoBack.classList.remove("hide");
     btnClear.classList.remove("hide");
 
+    btnGoBack.onclick = reset;
+
     var name = localStorage.getItem("name");
     var score = localStorage.getItem("score");
 
     //create li element
     var li = document.createElement('li');
     scoreList.appendChild(li);
+    li.setAttribute("id", "li");
     li.classList.add("highScore");
     li.innerHTML= "1. " + name + " - " + score + ".";
 }
@@ -243,6 +246,8 @@ var reset = function() {
     btnGoBack.classList.add("hide");
     btnClear.classList.add("hide");
     timer.textContent = "Time: " + 80;
+    var li = document.getElementById("li")
+    scoreList.removeChild(li);
 };
 
 
