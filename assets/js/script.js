@@ -1,4 +1,5 @@
-var timer = document.getElementById('countdown')
+var viewHigh = document.getElementById('viewScore');
+var timer = document.getElementById('countdown');
 var titleQ = document.getElementById('questionhead');
 var para = document.getElementById('initalmessage');
 var startBtn = document.getElementById('btn-start');
@@ -7,9 +8,17 @@ var buttonTwo = document.getElementById('btn-Two');
 var buttonThree = document.getElementById('btn-Three');
 var buttonFour = document.getElementById('btn-Four');
 var answerResult = document.getElementById('qResult');
+var paraSubmit = document.getElementById('highScoreSubmitp');
+var inputSubmit =document.getElementById('highScoreSubmitI');
+var btnSubmit = document.getElementById('btn-submit');
+var highScores = document.getElementById('highScores');
+var btnGoBack = document.getElementById('btn-goback');
+var btnClear = document.getElementById('btn-clear');
+var scoreList = document.getElementById('highScores');
+var CodeQuizScore = {};
 
 function startTest() {
-    var timeLeft = 10;
+    var timeLeft = 120;
 
     var countdown = function() {
         console.log(timeLeft);
@@ -26,6 +35,11 @@ function startTest() {
             };
         };
     };
+
+    viewHigh.addEventListener("click", function(){ 
+        clearInterval(timeInterval);
+        displayHighScore;
+    });
 
     var timeInterval = setInterval(countdown, 1000);
     firstquestion();
@@ -151,31 +165,87 @@ function startTest() {
             answerResult.textContent = "Wrong!";
             timeLeft = timeLeft - 20;
             clearInterval(timeInterval);
-            saveScore();
+            newHighScore();
         };
     
         function sixTrue() {
             answerResult.textContent = "Correct!";
             clearInterval(timeInterval);
-            saveScore();
+            newHighScore();
         };
     };
 
-    var saveScore = function() {
-    };
-
-    var reset = function() {
-        para.classList.remove("hide"); 
-        titleQ.classList.remove("questionhead");
-        titleQ.textContent = "Coding Quiz Challenge";
-        startBtn.classList.remove("hide");
+    var newHighScore = function() {
+        titleQ.textContent = "All done!";
+        para.classList.remove("hide");
+        para.textContent = "Your final score is " + timeLeft + ".";
+        para.classList.add("highScorep");
+        paraSubmit.classList.remove("hide");
+        paraSubmit.textContent = "Enter initals: ";
+        inputSubmit.classList.remove("hide");
+        btnSubmit.classList.remove("hide")
         buttonOne.classList.add("hide");
         buttonTwo.classList.add("hide");
         buttonThree.classList.add("hide");
-        buttonFour.classList.add("hide");
-        answerResult.classList.add("hide");
-        timer.textContent = "Time: " + 80;
+        buttonFour.classList.add("hide");     
     };
+
+    btnSubmit.addEventListener('click', function(event) {
+        event.preventDefault();
+        var name = inputSubmit.value;
+
+        var name = localStorage.setItem("name", name);
+        var score = localStorage.setItem("score", timeLeft);
+        displayHighScore();
+    });    
 };
 
+var displayHighScore = function() {
+    titleQ.textContent = "High Scores";
+    titleQ.classList.add("questionhead");
+    para.classList.add("hide");
+    paraSubmit.classList.add("hide");
+    inputSubmit.classList.add("hide");
+    btnSubmit.classList.add("hide")
+    buttonOne.classList.add("hide");
+    buttonTwo.classList.add("hide");
+    buttonThree.classList.add("hide");
+    buttonFour.classList.add("hide");
+    startBtn.classList.add("hide");
+    buttonOne.classList.add("hide");
+    buttonTwo.classList.add("hide");
+    buttonThree.classList.add("hide");
+    buttonFour.classList.add("hide");
+    answerResult.classList.add("hide");
+    btnGoBack.classList.remove("hide");
+    btnClear.classList.remove("hide");
+
+    var name = localStorage.getItem("name");
+    var score = localStorage.getItem("score");
+
+    //create li element
+    var li = document.createElement('li');
+    scoreList.appendChild(li);
+    li.classList.add("highScore");
+    li.innerHTML= "1. " + name + " - " + score + ".";
+}
+
+var reset = function() {
+    para.classList.remove("hide"); 
+    titleQ.classList.remove("questionhead");
+    titleQ.textContent = "Coding Quiz Challenge";
+    startBtn.classList.remove("hide");
+    buttonOne.classList.add("hide");
+    buttonTwo.classList.add("hide");
+    buttonThree.classList.add("hide");
+    buttonFour.classList.add("hide");
+    answerResult.classList.add("hide");
+    btnGoBack.classList.add("hide");
+    btnClear.classList.add("hide");
+    timer.textContent = "Time: " + 80;
+};
+
+
+
 startBtn.onclick = startTest;
+viewHigh.onclick = displayHighScore;
