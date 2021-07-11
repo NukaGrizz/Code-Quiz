@@ -9,16 +9,21 @@ var buttonFour = document.getElementById('btn-Four');
 var answerResult = document.getElementById('qResult');
 
 function startTest() {
-    var timeLeft = 80;
+    var timeLeft = 10;
 
     var countdown = function() {
         console.log(timeLeft);
         timeLeft--;
         timer.textContent = 'Time: ' + timeLeft;
-        if (timeLeft === 0) {
+        if (timeLeft <= 0) {
             alert("timesup");
             clearInterval(timeInterval);
-            fail();
+            var retry = confirm("You have failed! Try Again?");
+            if (retry == true) {
+                startTest();
+            } else {
+                reset();
+            };
         };
     };
 
@@ -28,7 +33,7 @@ function startTest() {
     function firstquestion() {
         
         para.classList.add("hide"); 
-        titleQ.classList.add("questionhead")
+        titleQ.classList.add("questionhead");
         titleQ.textContent = "Commonly used data types DO NOT include ____________.";
         startBtn.classList.add("hide");
         buttonOne.classList.remove("hide");
@@ -145,13 +150,31 @@ function startTest() {
         function sixFalse() {
             answerResult.textContent = "Wrong!";
             timeLeft = timeLeft - 20;
+            clearInterval(timeInterval);
             saveScore();
         };
     
         function sixTrue() {
             answerResult.textContent = "Correct!";
+            clearInterval(timeInterval);
             saveScore();
         };
+    };
+
+    var saveScore = function() {
+    };
+
+    var reset = function() {
+        para.classList.remove("hide"); 
+        titleQ.classList.remove("questionhead");
+        titleQ.textContent = "Coding Quiz Challenge";
+        startBtn.classList.remove("hide");
+        buttonOne.classList.add("hide");
+        buttonTwo.classList.add("hide");
+        buttonThree.classList.add("hide");
+        buttonFour.classList.add("hide");
+        answerResult.classList.add("hide");
+        timer.textContent = "Time: " + 80;
     };
 };
 
