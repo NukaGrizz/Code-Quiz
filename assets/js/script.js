@@ -18,7 +18,7 @@ var scoreList = document.getElementById('highScores');
 var CodeQuizScore = {};
 
 function startTest() {
-    var timeLeft = 120;
+    var timeLeft = 60;
 
     var countdown = function() {
         console.log(timeLeft);
@@ -222,28 +222,39 @@ var displayHighScore = function() {
 
     btnGoBack.onclick = reset;
 
-    btnClear.addEventListener('click', function() {
-        console.log("click");
-        localStorage.removeItem('name');
-        localStorage.removeItem('score');
-        displayHighScore;
-        var li = document.getElementById("li")
-        scoreList.removeChild(li);
-    });
-
     var name = localStorage.getItem("name");
     var score = localStorage.getItem("score");
 
-    //create li element
-    var li = document.createElement('li');
-    scoreList.appendChild(li);
-    li.setAttribute("id", "li");
-    li.classList.add("highScore");
-    li.innerHTML= "1. " + name + " - " + score + ".";
+    btnClear.addEventListener('click', function() {
+        if (name === null || name === ""){
+        } else {
+            console.log("click");
+            localStorage.removeItem('name');
+            localStorage.removeItem('score');
+            displayHighScore;
+            var lI = document.getElementById("li")
+            li
+            console.log(lI)
+            scoreList.removeChild(lI);
+        };
+    });
+    
+    if (name === null || name === ""){
+    } else {
+        //create li element
+        var li = document.createElement('li');
+        console.log(li)
+        scoreList.appendChild(li);
+        li.setAttribute("id", "li");
+        li.classList.add("highScore");
+        li.innerHTML= "1. " + name + " - " + score + ".";
+    }
 }
 
 var reset = function() {
-    para.classList.remove("hide"); 
+    para.classList.remove("hide");
+    para.classList.remove("highScorep");
+    para.textContent = "Try to answer the following code related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!";
     titleQ.classList.remove("questionhead");
     titleQ.textContent = "Coding Quiz Challenge";
     startBtn.classList.remove("hide");
@@ -255,11 +266,9 @@ var reset = function() {
     btnGoBack.classList.add("hide");
     btnClear.classList.add("hide");
     timer.textContent = "Time: " + 80;
-    var li = document.getElementById("li")
-    scoreList.removeChild(li);
+    location.reload();
+    return false;
 };
-
-
 
 startBtn.onclick = startTest;
 viewHigh.onclick = displayHighScore;
