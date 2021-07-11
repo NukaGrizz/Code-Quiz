@@ -15,7 +15,8 @@ var highScores = document.getElementById('highScores');
 var btnGoBack = document.getElementById('btn-goback');
 var btnClear = document.getElementById('btn-clear');
 var scoreList = document.getElementById('highScores');
-var CodeQuizScore = {};
+var CodeQuizScores = [];
+var CodeQuizScoreObj = {};
 
 function startTest() {
     var timeLeft = 60;
@@ -190,17 +191,39 @@ function startTest() {
         buttonFour.classList.add("hide");     
     };
 
+    // create new high score
     btnSubmit.addEventListener('click', function(event) {
         event.preventDefault();
         var name = inputSubmit.value;
-
-        var name = localStorage.setItem("name", name);
-        var score = localStorage.setItem("score", timeLeft);
+        var score = timeLeft
+        console.log(name);
+        console.log(score);
+        CodeQuizScoreObj = {
+            name: name,
+            value: score
+        };
+    
+        // save tasks to localStorage
+        saveScores();
         displayHighScore();
     });    
 };
 
+var saveScores = function() {
+    var currentSavedScores = localStorage.getItem("Scores");
+    if (!currentSavedScores) {
+        console.log(CodeQuizScoreObj);
+        CodeQuizScores.push(CodeQuizScoreObj);
+        localStorage.setItem("Scores", JSON.stringify(CodeQuizScores));
+    } else {
+        currentSavedScores = JSON.parse(currentSavedScores);
+        currentSavedScores.push(CodeQuizScoreObj);
+        localStorage.setItem("Scores", JSON.stringify(currentSavedScores));
+    };
+};
+
 var displayHighScore = function() {
+    //need to delete current score list
     titleQ.textContent = "High Scores";
     titleQ.classList.add("questionhead");
     para.classList.add("hide");
@@ -222,34 +245,46 @@ var displayHighScore = function() {
 
     btnGoBack.onclick = reset;
 
-    var name = localStorage.getItem("name");
-    var score = localStorage.getItem("score");
-
-    btnClear.addEventListener('click', function() {
-        if (name === null || name === ""){
-        } else {
-            console.log("click");
-            localStorage.removeItem('name');
-            localStorage.removeItem('score');
-            displayHighScore;
-            var lI = document.getElementById("li")
-            li
-            console.log(lI)
-            scoreList.removeChild(lI);
-        };
-    });
-    
-    if (name === null || name === ""){
-    } else {
+    var createScoreEl = function(savedScoresObj){
         //create li element
-        var li = document.createElement('li');
-        console.log(li)
-        scoreList.appendChild(li);
-        li.setAttribute("id", "li");
-        li.classList.add("highScore");
-        li.innerHTML= "1. " + name + " - " + score + ".";
+        var scoreLi = document.createElement('li');
+        console.log(scoreLi)
+        scoreList.appendChild(scoreLi);
+        scoreLi.setAttribute("id", "li");
+        scoreLi.classList.add("highScore");
+        scoreLi.innerHTML= savedScoresObj.name + " - " + savedScoresObj.value + ".";
+    };
+
+    var savedScores = localStorage.getItem("Scores");
+
+    if (!savedScores) {
+        console.log("click1");
+        return false;
     }
-}
+    console.log("Saved tasks found!");
+    savedScores = JSON.parse(savedScores);
+    console.log(savedScores);
+
+    for (var i = 0; i < savedScores.length; i++) {
+        createScoreEl(savedScores[i]);
+    }
+};
+
+btnClear.onclick = function() {
+    var scoresStorage = localStorage.getItem("Scores");
+    if (scoresStorage === null){
+    } else {
+        console.log("clickb");
+        var savedScores = localStorage.getItem("Scores");
+        savedScores = JSON.parse(savedScores);
+        console.log(savedScores);
+        for (var i = 0; i < savedScores.length; i++) {
+            var lI = document.getElementById("li");
+            lI.remove();
+        };
+        localStorage.removeItem('Scores');
+    }; 
+};
 
 var reset = function() {
     para.classList.remove("hide");
