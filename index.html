@@ -9,23 +9,34 @@
   </head>
   <body>
     <header>
-        <h1>View High Scores</h1>
-        <p id="countdown"></p>
+        <h1 id="viewScore" class="viewScore">View High Scores</h1>
+        <p id="countdown" class="countdown" type="button">Time: 60</p>
     </header>
     <main class="container">
-        <h2 class="questionhead">Are you ready?</h1>
-        <p class="initalmessage">Try to answer the following code related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds</p>
-        <button id="start-Quiz">Start Quiz</button>
-        <button id="btn-One"></button>
-        <button id="btn-Two"></button>
-        <button id="btn-Three"></button>
-        <button id="btn-four"></button>
-        <button id="btn-submit"></button>
-        <button id="clear-high"></button>
+        <h2 id="questionhead" class="">Coding Quiz Challenge</h1>
+        <p id="initalmessage" class="initalmessage">Try to answer the following code related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
+        <button id="btn-start" class="btn-start" type="button" onclick="alert('hello')">Start Quiz</button>
+        
+        <div id="highScoreSubmit" class="highScoreSubmit">
+            <p id="highScoreSubmitp"class="submitScore hide">Enter Initals: </p>
+            <input id="highScoreSubmitI" class="submitScore hide" type="text">
+            <button id="btn-submit" class="btn-submit hide" type="button">Submit</button>
+        </div>
 
-      <button id="start">Start</button>
-      <h2 id="countdown"></h2>
-      <p id="main"></p>
+        <div class="btn-multi">
+            <button id="btn-One" class="btn-One btn-questions hide" type="button">1</button>
+            <button id="btn-Two" class="btn-Two btn-questions hide" type="button" >2</button>
+            <button id="btn-Three" class=" btn-Three btn-questions hide" type="button">3</button>
+            <button id="btn-Four" class="btn-Four btn-questions hide" type="button">4</button>
+            <p id="qResult" class="qResult hide">Wrong</p>
+            <ol id="highScores" class="highScores"></ol>
+        </div>
+
+        <div class="btns-high-group">
+        <button id="btn-goback" class="btn-high hide" type="button">Go back</button>
+        <button id="btn-clear" class="btn-high hide" type="button">Clear high scores</button>
+        </div>
+
     </main>
     <script src="./assets/js/script.js"></script>
   </body>
