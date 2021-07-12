@@ -7,31 +7,36 @@
     <title>Code Quiz</title>
     <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
+
   <body>
+    <!--Header-->
     <header>
         <h1 id="viewScore" class="viewScore">View High Scores</h1>
         <p id="countdown" class="countdown" type="button">Time: 60</p>
     </header>
+    <!--Main-->
     <main class="container">
+        <!--Elements that load on startup-->
         <h2 id="questionhead" class="">Coding Quiz Challenge</h1>
         <p id="initalmessage" class="initalmessage">Try to answer the following code related questions within the time limit. Keep in mind that incorrect answers will penalize your score/time by ten seconds!</p>
         <button id="btn-start" class="btn-start" type="button" onclick="alert('hello')">Start Quiz</button>
-        
+        <!--Elements that load for highscore viewing-->
         <div id="highScoreSubmit" class="highScoreSubmit">
             <p id="highScoreSubmitp"class="submitScore hide">Enter Initals: </p>
             <input id="highScoreSubmitI" class="submitScore hide" type="text">
             <button id="btn-submit" class="btn-submit hide" type="button">Submit</button>
         </div>
-
+        <!--Elements that load for test to show buttons and prior answer result or element for score list-->
         <div class="btn-multi">
             <button id="btn-One" class="btn-One btn-questions hide" type="button">1</button>
             <button id="btn-Two" class="btn-Two btn-questions hide" type="button" >2</button>
             <button id="btn-Three" class=" btn-Three btn-questions hide" type="button">3</button>
             <button id="btn-Four" class="btn-Four btn-questions hide" type="button">4</button>
             <p id="qResult" class="qResult hide">Wrong</p>
+            <!--Element for score list on high score page-->
             <ul id="highScores" class="highScores"></ul>
         </div>
-
+        <!--High score buttons group-->
         <div class="btns-high-group">
         <button id="btn-goback" class="btn-high hide" type="button">Go back</button>
         <button id="btn-clear" class="btn-high hide" type="button">Clear high scores</button>

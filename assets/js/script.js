@@ -20,9 +20,10 @@ var scoreList = document.getElementById('highScores');
 var CodeQuizScores = [];
 var CodeQuizScoreObj = {};
 
+//Start Test Function
 function startTest() {
+    //Countdown timer running in header
     var timeLeft = 60;
-
     var countdown = function() {
         console.log(timeLeft);
         timeLeft--;
@@ -38,13 +39,15 @@ function startTest() {
             };
         };
     };
+    var timeInterval = setInterval(countdown, 1000);
 
+    //view highscore while taking test
     viewHigh.addEventListener("click", function(){ 
         clearInterval(timeInterval);
         displayHighScore;
     });
 
-    var timeInterval = setInterval(countdown, 1000);
+    //firstquestion in test
     firstquestion();
 
     function firstquestion() {
@@ -67,18 +70,18 @@ function startTest() {
         buttonThree.onclick = secTrue;
         buttonFour.onclick = secFalse;
     };
-
+    //first question answer false
     function secFalse() {
         answerResult.textContent = "Wrong!";
         timeLeft = timeLeft - 20;
         secondQuestion();
     };
-
+    //first question answer true
     function secTrue() {
         answerResult.textContent = "Correct!";
         secondQuestion();
     };
-
+    //second question
     function secondQuestion() {
         titleQ.textContent = "The condition in a if / else statment is enclosed with ____________.";
         buttonOne.textContent = "1. quotes";
@@ -92,18 +95,18 @@ function startTest() {
         buttonThree.onclick = thrTrue;
         buttonFour.onclick = thrFalse;
     };
-
+    //second question answer false
     function thrFalse() {
         answerResult.textContent = "Wrong!";
         timeLeft = timeLeft - 20;
         thirdQuestion();
     };
-
+    //second question answer true
     function thrTrue() {
         answerResult.textContent = "Correct!";
         thirdQuestion();
     };
-
+    //third question
     function thirdQuestion() {
         titleQ.textContent = "Arrays in Javascript can be used to store ____________.";
         buttonOne.textContent = "1. numbers and strings";
@@ -116,18 +119,18 @@ function startTest() {
         buttonThree.onclick = forFalse;
         buttonFour.onclick = forTrue;
     };
-
+    //third question answer false
     function forFalse() {
         answerResult.textContent = "Wrong!";
         timeLeft = timeLeft - 20;
         forthQuestion();
     };
-
+    //third questiopn answer true
     function forTrue() {
         answerResult.textContent = "Correct!";
         forthQuestion();
     };
-
+    //fourth question
     function forthQuestion() {
         titleQ.textContent = "String values must be closed within ____________ when being assigned to variables.";
         buttonOne.textContent = "1. commas";
@@ -140,18 +143,18 @@ function startTest() {
         buttonThree.onclick = fivTrue;
         buttonFour.onclick = fivFalse;
     };
-
+    //fourth question answer false
     function fivFalse() {
         answerResult.textContent = "Wrong!";
         timeLeft = timeLeft - 20;
         fifthQuestion();
     };
-
+    //fourth question answer true
     function fivTrue() {
         answerResult.textContent = "Correct!";
         fifthQuestion();
     };
-
+    //fifth question
     function fifthQuestion() {
         titleQ.textContent = "a very useful tool used during development and debugging for printing content to the debugger is:";
         buttonOne.textContent = "1. Javascript";
@@ -163,7 +166,7 @@ function startTest() {
         buttonTwo.onclick = sixFalse;
         buttonThree.onclick = sixTrue;
         buttonFour.onclick = sixFalse;
-
+        //fifth question answer false
         function sixFalse() {
             answerResult.textContent = "Wrong!";
             timeLeft = timeLeft - 20;
@@ -181,14 +184,14 @@ function startTest() {
                 newHighScore();
             }
         };
-    
+        //fifth question answer true
         function sixTrue() {
             answerResult.textContent = "Correct!";
             clearInterval(timeInterval);
             newHighScore();
         };
     };
-
+    //view you new score at end of successful test
     var newHighScore = function() {
         titleQ.textContent = "All done!";
         para.classList.remove("hide");
@@ -204,7 +207,7 @@ function startTest() {
         buttonFour.classList.add("hide");     
     };
 
-    // create new high score
+    // create object ot of new score to be saved in saveScores function
     btnSubmit.addEventListener('click', function(event) {
         event.preventDefault();
         var name = inputSubmit.value;
@@ -216,12 +219,12 @@ function startTest() {
             value: score
         };
     
-        // save tasks to localStorage
+        // save Score to localStorage and view all High scores
         saveScores();
         displayHighScore();
     });    
 };
-
+//save new score obj to local storage
 var saveScores = function() {
     var currentSavedScores = localStorage.getItem("Scores");
     if (!currentSavedScores) {
@@ -234,10 +237,8 @@ var saveScores = function() {
         localStorage.setItem("Scores", JSON.stringify(currentSavedScores));
     };
 };
-
+//display high score list 
 var displayHighScore = function() {
-    
-    //need to delete current score list
     titleQ.textContent = "High Scores";
     titleQ.classList.add("questionhead");
     para.classList.add("hide");
@@ -256,9 +257,9 @@ var displayHighScore = function() {
     answerResult.classList.add("hide");
     btnGoBack.classList.remove("hide");
     btnClear.classList.remove("hide");
-
+    //button to go back to start screen
     btnGoBack.onclick = reset;
-
+    //create score list from local storage
     var createScoreEl = function(savedScoresObj){
         //create li element
         var scoreLi = document.createElement('li');
@@ -283,7 +284,7 @@ var displayHighScore = function() {
     for (var i = 0; i < savedScores.length; i++) {
         createScoreEl(savedScores[i]);
     }
-
+    //sort list of high scores from highest to lowest
     var sortList = function() {
         var list, i, switching, b, shouldSwitch;
         list = document.getElementById("highScores");
@@ -315,9 +316,9 @@ var displayHighScore = function() {
             switching = true;
           }
         }
-    }
-
+    };
     sortList();
+    //if highscore clicked while on highscore page reload highscore page
     viewHigh.onclick = function() {
         var scoresStorage = localStorage.getItem("Scores");
         if (scoresStorage === null){
@@ -334,7 +335,7 @@ var displayHighScore = function() {
         displayHighScore();
     };
 };
-
+//button to clear all highscores and to clear local storage
 btnClear.onclick = function() {
     var scoresStorage = localStorage.getItem("Scores");
     if (scoresStorage === null){
@@ -350,7 +351,7 @@ btnClear.onclick = function() {
         localStorage.removeItem('Scores');
     }; 
 };
-
+//function to reset application and bring user back to the front page without clearing highscores
 var reset = function() {
     para.classList.remove("hide");
     para.classList.remove("highScorep");
@@ -370,5 +371,8 @@ var reset = function() {
     return false;
 };
 
+//start test button
 startBtn.onclick = startTest;
+
+//high score button
 viewHigh.onclick = displayHighScore;
