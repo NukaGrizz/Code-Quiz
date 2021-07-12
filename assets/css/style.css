@@ -1,17 +1,11 @@
+/*Global style*/
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
   }
 
-.hide {
-    display: none;
-}
-
-.show {
-    display: flex;
-}
-
+/*header styles*/
 header {
     display: flex;
     justify-content: center;
@@ -35,7 +29,7 @@ header {
     font-size: 20px;
     text-align: right;
 }
-
+/*Begin main scetion styles*/
 main {
     display: flex;
     flex-direction: column;
@@ -51,7 +45,7 @@ main h2 {
     font-size: xx-large;
     width: 100%;
 }
-
+/*style to move main h2 over to left during test*/
 .questionhead {
     text-align: left;
 }
@@ -62,11 +56,11 @@ main p {
     width: 100%;
     font-size: x-large;
 }
-
+/*style added to highscore li elements when created*/
 .highScorep {
     text-align: left;
 }
-
+/*button styles*/
 button {
     border-radius: 10px;
     font-size: larger;
@@ -98,7 +92,7 @@ button:hover {
     width: 30%;
     min-width: 100px; 
 }
-
+/*answer result style*/
 .qResult {
     text-align: left;
     width: 100%;
@@ -108,7 +102,7 @@ button:hover {
     color: rgba(128, 128, 128, 0.7);
     margin-top: 10px;
 }
-
+/*styles for submit high score page*/
 .highScoreSubmit {
     display: flex;
     justify-content: flex-start;
@@ -127,7 +121,7 @@ button:hover {
     min-width: 100px; 
     padding: 0;
 }
-
+/*styles for highscore page*/
 ul {
     list-style-type: none;
 }
@@ -146,7 +140,7 @@ ul {
 .btn-high {
     margin: 10px;
 }
-
+/*style to hide elements when not in use*/
 .hide {
     display: none;
 }
