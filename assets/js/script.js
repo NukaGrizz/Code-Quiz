@@ -1,3 +1,5 @@
+//Global variables
+
 var viewHigh = document.getElementById('viewScore');
 var timer = document.getElementById('countdown');
 var titleQ = document.getElementById('questionhead');
@@ -30,7 +32,7 @@ function startTest() {
             clearInterval(timeInterval);
             var retry = confirm("You have failed! Try Again?");
             if (retry == true) {
-                startTest();
+                reset();
             } else {
                 reset();
             };
@@ -165,8 +167,19 @@ function startTest() {
         function sixFalse() {
             answerResult.textContent = "Wrong!";
             timeLeft = timeLeft - 20;
-            clearInterval(timeInterval);
-            newHighScore();
+            if (timeLeft <= 0) {
+                alert("timesup");
+                clearInterval(timeInterval);
+                var retry = confirm("You have failed! Try Again?");
+                if (retry == true) {
+                    reset();
+                } else {
+                    reset();
+                };
+            } else {
+                clearInterval(timeInterval);
+                newHighScore();
+            }
         };
     
         function sixTrue() {
@@ -223,6 +236,7 @@ var saveScores = function() {
 };
 
 var displayHighScore = function() {
+    
     //need to delete current score list
     titleQ.textContent = "High Scores";
     titleQ.classList.add("questionhead");
@@ -251,6 +265,7 @@ var displayHighScore = function() {
         console.log(scoreLi)
         scoreList.appendChild(scoreLi);
         scoreLi.setAttribute("id", "li");
+        scoreLi.setAttribute("value", savedScoresObj.value)
         scoreLi.classList.add("highScore");
         scoreLi.innerHTML= savedScoresObj.name + " - " + savedScoresObj.value + ".";
     };
@@ -268,6 +283,56 @@ var displayHighScore = function() {
     for (var i = 0; i < savedScores.length; i++) {
         createScoreEl(savedScores[i]);
     }
+
+    var sortList = function() {
+        var list, i, switching, b, shouldSwitch;
+        list = document.getElementById("highScores");
+        switching = true;
+        /* Make a loop that will continue until
+        no switching has been done: */
+        while (switching) {
+          // start by saying: no switching is done:
+          switching = false;
+          b = list.getElementsByTagName("li");
+          // Loop through all list-items:
+          for (i = 0; i < (b.length - 1); i++) {
+            // start by saying there should be no switching:
+            shouldSwitch = false;
+            /* check if the next item should
+            switch place with the current item: */
+            if (b[i].value < b[i + 1].value) {
+              /* if next item is alphabetically
+              lower than current item, mark as a switch
+              and break the loop: */
+              shouldSwitch = true;
+              break;
+            }
+          }
+          if (shouldSwitch) {
+            /* If a switch has been marked, make the switch
+            and mark the switch as done: */
+            b[i].parentNode.insertBefore(b[i + 1], b[i]);
+            switching = true;
+          }
+        }
+    }
+
+    sortList();
+    viewHigh.onclick = function() {
+        var scoresStorage = localStorage.getItem("Scores");
+        if (scoresStorage === null){
+        } else {
+            console.log("clickb");
+            var savedScores = localStorage.getItem("Scores");
+            savedScores = JSON.parse(savedScores);
+            console.log(savedScores);
+            for (var i = 0; i < savedScores.length; i++) {
+                var lI = document.getElementById("li");
+                lI.remove();
+            };
+        };
+        displayHighScore();
+    };
 };
 
 btnClear.onclick = function() {
